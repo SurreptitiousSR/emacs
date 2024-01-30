@@ -26,6 +26,7 @@
   - [[#turn-off-annoying-indent][Turn off annoying indent]]
 
 * Custom-set vairables 
+These got added the first time I ran EVIl mode so i'm leaving them here becuase I don't know what they do.
 #+begin_src emacs-lisp
 
 (custom-set-variables
@@ -46,6 +47,7 @@
 
 * Important programs to run first
 ** EVIL mode
+Add VIM functionality to emacs.
 #+begin_src emacs-lisp
 
 ;; Run evil mode on startup with configuration options
@@ -63,6 +65,7 @@
 #+end_src
 
 ** MELPA repository 
+More packages = better.
 #+begin_src emacs-lisp
 
 ;; Adds the MELPA repositories 
@@ -72,8 +75,9 @@
  
 #+end_src
   
-** Keybindings 
+** Keybindings
 *** Change Meta key to Command instead of Alt
+MacOS specific. I need the alt key availble for alt+3 to type a "#".
 #+begin_src emacs-lisp
 
 ;; Changes Meta key to "Command" instead of "Alt"
@@ -85,6 +89,7 @@ mac-option-modifier 'none)
 #+end_src
 
 *** General keybindings 
+So begin all the keybindings. 
 #+begin_src emacs-lisp
 
   ;; General keybindings 
@@ -145,6 +150,7 @@ mac-option-modifier 'none)
 
 * Appearence / UI / Fonts
 ** All the icons
+Prettier icons in dired.
 #+begin_src emacs-lisp
 
 (use-package all-the-icons
@@ -156,12 +162,13 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Fonts
+I grew up in the 90s editing autoexec.bat and config.sys to enable more memory for X-wing and Doom, so that's why emacs looks like this. Fonts were downloaded from:  https://int10h.org/oldschool-pc-fonts/
 #+begin_src emacs-lisp
 
 ;; Default fonts
 (set-face-attribute 'default nil
-		    :font "Ac437 IBM Conv 11"
-		    :height 110
+		    :font "Ac437 IBM VGA 8x16"
+		    :height 160
 		    :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
@@ -170,8 +177,8 @@ mac-option-modifier 'none)
 		    :weight 'medium)
 
 (set-face-attribute 'fixed-pitch nil
-		    :font "Ac437 IBM Conv 11"
-		    :height 110
+		    :font "Ac437 IBM VGA 8x16"
+		    :height 160
 		    :weight 'medium)
 
 
@@ -182,15 +189,17 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Change default line spacing 
+Using 90s fonts, you need the lines to be better spaced.
 #+begin_src emacs-lisp
 
 ;; Change default line spacing
-(setq-default line-spacing 0.40)
+(setq-default line-spacing 0.10)
 
  
 #+end_src
 
 ** Change foregroud, background, and cursor colours
+Black and white is better looking, but a blue background would also be acceptable. 
 #+begin_src emacs-lisp
 
 ;; Change the foreground, background, and cursor colours
@@ -201,6 +210,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Remove scroll bar
+Don't need one.
 #+begin_src emacs-lisp
 
 (scroll-bar-mode -1) ;; remove the scroll bar
@@ -208,6 +218,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Remove the tool bar
+Who are you kidding, emacs is always run fullscreen anyway.
 #+begin_src emacs-lisp
 
 (tool-bar-mode -1) ;; remove the tool bar (bar at top of screen)
@@ -215,6 +226,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Toggle line numbers and truncated lines 
+Line numbers are useful for programming but not when doing most other things.
 #+begin_src emacs-lisp
 
 ;; Display line numbers and truncated lines
@@ -265,6 +277,7 @@ mac-option-modifier 'none)
 
 
 * Which key
+Gives descriptions and is used in conjunction with General keybindings.
 #+begin_src emacs-lisp
 
 ;; Which key configuration
@@ -288,6 +301,7 @@ mac-option-modifier 'none)
 #+end_src
 
 * ORG mode 
+Currently just have some sanity edits. 
 ** Load ORG tempo at startup
 #+begin_src emacs-lisp
 
@@ -297,6 +311,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Enable table of contents
+Why wouldn't this be enabled by default!?
 #+begin_src emacs-lisp
 
 ;; ORG mode table of contents
@@ -307,6 +322,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Better looking bullets
+Much better than asterisks.
 #+begin_src emacs-lisp
 
 ;; ORG mode bullets
@@ -317,6 +333,7 @@ mac-option-modifier 'none)
 #+end_src
 
 ** Turn off annoying indent
+Literally the most pointless automatic indent feature.
 #+begin_src emacs-lisp
 
 ;; Turn off ORG mode annoying automatic indent

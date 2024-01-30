@@ -96,8 +96,8 @@ mac-option-modifier 'none)
 
 ;; Default fonts
 (set-face-attribute 'default nil
-		    :font "Ac437 IBM Conv 11"
-		    :height 110
+		    :font "Ac437 IBM VGA 8x16"
+		    :height 160
 		    :weight 'medium)
 
 (set-face-attribute 'variable-pitch nil
@@ -106,8 +106,8 @@ mac-option-modifier 'none)
 		    :weight 'medium)
 
 (set-face-attribute 'fixed-pitch nil
-		    :font "Ac437 IBM Conv 11"
-		    :height 110
+		    :font "Ac437 IBM VGA 8x16"
+		    :height 160
 		    :weight 'medium)
 
 
@@ -116,7 +116,7 @@ mac-option-modifier 'none)
 		    :slant 'italic)
 
 ;; Change default line spacing
-(setq-default line-spacing 0.40)
+(setq-default line-spacing 0.10)
 
 ;; Change the foreground, background, and cursor colours
 (add-to-list 'default-frame-alist '(foreground-color . "white"))

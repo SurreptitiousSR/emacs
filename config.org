@@ -5,18 +5,19 @@
 
 * Table of contents :toc:
 - [[#custom-set-vairables][Custom-set vairables]]
-- [[#evil-mode][EVIL mode]]
-- [[#melpa-repository][MELPA repository]]
-- [[#keybindings][Keybindings]]
-  - [[#change-meta-key-to-command-instead-of-alt][Change Meta key to Command instead of Alt]]
-  - [[#general-keybindings][General keybindings]]
+- [[#important-programs-to-run-first][Important programs to run first]]
+  - [[#evil-mode][EVIL mode]]
+  - [[#melpa-repository][MELPA repository]]
+  - [[#keybindings][Keybindings]]
 - [[#appearence--ui--fonts][Appearence / UI / Fonts]]
+  - [[#all-the-icons][All the icons]]
   - [[#fonts][Fonts]]
   - [[#change-default-line-spacing][Change default line spacing]]
   - [[#change-foregroud-background-and-cursor-colours][Change foregroud, background, and cursor colours]]
   - [[#remove-scroll-bar][Remove scroll bar]]
   - [[#remove-the-tool-bar][Remove the tool bar]]
   - [[#toggle-line-numbers-and-truncated-lines][Toggle line numbers and truncated lines]]
+- [[#ivy-counsel][IVY (COUNSEL)]]
 - [[#which-key][Which key]]
 - [[#org-mode][ORG mode]]
   - [[#load-org-tempo-at-startup][Load ORG tempo at startup]]
@@ -43,7 +44,8 @@
  
 #+end_src
 
-* EVIL mode
+* Important programs to run first
+** EVIL mode
 #+begin_src emacs-lisp
 
 ;; Run evil mode on startup with configuration options
@@ -60,7 +62,7 @@
 
 #+end_src
 
-* MELPA repository 
+** MELPA repository 
 #+begin_src emacs-lisp
 
 ;; Adds the MELPA repositories 
@@ -70,8 +72,8 @@
  
 #+end_src
   
-* Keybindings 
-** Change Meta key to Command instead of Alt
+** Keybindings 
+*** Change Meta key to Command instead of Alt
 #+begin_src emacs-lisp
 
 ;; Changes Meta key to "Command" instead of "Alt"
@@ -82,60 +84,77 @@ mac-option-modifier 'none)
  
 #+end_src
 
-** General keybindings 
+*** General keybindings 
 #+begin_src emacs-lisp
 
-;; General keybindings 
-(use-package general
-    :config
-    (general-evil-setup)
+  ;; General keybindings 
+  (use-package general
+      :config
+      (general-evil-setup)
 
-    ;; set up 'SPC' as the global leader key
-    (general-create-definer chronicler/leader-keys
-        :states '(normal insert visual emacs)
-	:keymaps 'override
-	:prefix "SPC" ;; set leader
-	:global-prefix "M-SPC") ;; access leader in insert mode
+      ;; set up 'SPC' as the global leader key
+      (general-create-definer chronicler/leader-keys
+	  :states '(normal insert visual emacs)
+	  :keymaps 'override
+	  :prefix "SPC" ;; set leader
+	  :global-prefix "M-SPC") ;; access leader in insert mode
 
-    (chronicler/leader-keys
-      "b" '(:ignore t :wk "buffer") ;; :wk = which key 
-      "bb" '(switch-to-buffer :wk "Switch buffer")
-      "bi" '(ibuffer :wk "Ibuffer")
-      "bk" '(kill-this-buffer :wk "Kill this buffer")
-      "bn" '(next-buffer :wk "Next buffer")
-      "bp" '(previous-buffer :wk "Previous buffer")
-      "br" '(revert-buffer :wk "Reload buffer")
-     )
+      (chronicler/leader-keys
+	"b" '(:ignore t :wk "buffer") ;; :wk = which key 
+	"bb" '(switch-to-buffer :wk "Switch buffer")
+	"bi" '(ibuffer :wk "Ibuffer")
+	"bk" '(kill-this-buffer :wk "Kill this buffer")
+	"bn" '(next-buffer :wk "Next buffer")
+	"bp" '(previous-buffer :wk "Previous buffer")
+	"br" '(revert-buffer :wk "Reload buffer")
+       )
 
-    (chronicler/leader-keys
-      "e" '(:ignore t :wk "Evaluate")
-      "eb" '(eval-buffer :wk "Evaluate elisp in buffer")
-      "ed" '(eval-defun :wk "Evaluate defun containing or after point")
-      "ee" '(eval-expression :wk "Evaluate and elisp expression")
-      "el" '(eval-last-sexp :wk "Evaluate elisp expression before point")
-      "er" '(eval-region :wk "Evaluate elisp in region"))
+      (chronicler/leader-keys
+	"e" '(:ignore t :wk "Evaluate")
+	"eb" '(eval-buffer :wk "Evaluate elisp in buffer")
+	"ed" '(eval-defun :wk "Evaluate defun containing or after point")
+	"ee" '(eval-expression :wk "Evaluate and elisp expression")
+	"el" '(eval-last-sexp :wk "Evaluate elisp expression before point")
+	"er" '(eval-region :wk "Evaluate elisp in region"))
 
-    (chronicler/leader-keys
-      "." '(find-file :wk "Find file")
-      "fc" '((lambda () (interactive) (find-file "~/.emacs.d/config.org")) :wk "Edit emacs config"))
+      (chronicler/leader-keys
+  "f" '(:ignore t :wk "Find")
+	"." '(find-file :wk "Find file")
+	"fc" '((lambda () (interactive) (find-file "~/.emacs.d/config.org")) :wk "Edit emacs config")
+  "fr" '(counsel-recentf :wk "Find recent files"))
 
 
-    (chronicler/leader-keys
-      "h" '(:ignore t :wk "Help")
-      "hf" '(describe-function :wk "Describe function")
-      "hv" '(describe-variable :wk "Describe variable")
-      "hrr" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config"))
+      (chronicler/leader-keys
+	"h" '(:ignore t :wk "Help")
+	"hf" '(describe-function :wk "Describe function")
+	"hv" '(describe-variable :wk "Describe variable")
+	"hrr" '((lambda () (interactive) (load-file "~/.emacs.d/init.el")) :wk "Reload emacs config"))
 
-    (chronicler/leader-keys
-      "t" '(:ignore t :wk "Toggle")
-      "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
-      "tt" '(visual-line-mode :wk "Toggle truncated lines"))
+      (chronicler/leader-keys
+	"t" '(:ignore t :wk "Toggle")
+	"tl" '(display-line-numbers-mode :wk "Toggle line numbers")
+	"tt" '(visual-line-mode :wk "Toggle truncated lines"))
+    
+      (chronicler/leader-keys
+	"s" '(:ignore t :wk "Shell")
+	"ss" '(shell :wk "Open shell")))
 
-)
+
  
 #+end_src
 
 * Appearence / UI / Fonts
+** All the icons
+#+begin_src emacs-lisp
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+#+end_src
+
 ** Fonts
 #+begin_src emacs-lisp
 
@@ -203,6 +222,47 @@ mac-option-modifier 'none)
 (global-visual-line-mode t)
  
 #+end_src
+
+* IVY (COUNSEL)
++ Ivy, a generic completion mechanism for Emacs.
++ Counsel, a collection of Ivy-enhanced versions of common Emacs commands.
++ Ivy-rich allows us to add descriptions alongside the commands in M-x.
+
+#+begin_src emacs-lisp
+  (use-package counsel
+    :after ivy
+    :config (counsel-mode))
+  
+  (use-package ivy
+    :bind
+    ;; ivy-resume resumes the last Ivy-based completion.
+    (("C-c C-r" . ivy-resume)
+     ("C-x B" . ivy-switch-buffer-other-window))
+    :custom
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-count-format "(%d/%d) ")
+    (setq enable-recursive-minibuffers t)
+    :config
+    (ivy-mode))
+
+  (use-package all-the-icons-ivy-rich
+    :ensure t
+    :init (all-the-icons-ivy-rich-mode 1))
+
+  (use-package ivy-rich
+    :after ivy
+    :ensure t
+    :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+    :custom
+    (ivy-virtual-abbreviate 'full
+     ivy-rich-switch-buffer-align-virtual-buffer t
+     ivy-rich-path-style 'abbrev)
+    :config
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer))
+
+#+end_src
+
 
 * Which key
 #+begin_src emacs-lisp

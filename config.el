@@ -42,7 +42,7 @@ mac-option-modifier 'none)
 
     ;; set up 'SPC' as the global leader key
     (general-create-definer chronicler/leader-keys
-        :states '(normal insert visual emacs)
+	:states '(normal insert visual emacs)
 	:keymaps 'override
 	:prefix "SPC" ;; set leader
 	:global-prefix "M-SPC") ;; access leader in insert mode
@@ -66,8 +66,10 @@ mac-option-modifier 'none)
       "er" '(eval-region :wk "Evaluate elisp in region"))
 
     (chronicler/leader-keys
+"f" '(:ignore t :wk "Find")
       "." '(find-file :wk "Find file")
-      "fc" '((lambda () (interactive) (find-file "~/.emacs.d/config.org")) :wk "Edit emacs config"))
+      "fc" '((lambda () (interactive) (find-file "~/.emacs.d/config.org")) :wk "Edit emacs config")
+"fr" '(counsel-recentf :wk "Find recent files"))
 
 
     (chronicler/leader-keys
@@ -81,7 +83,16 @@ mac-option-modifier 'none)
       "tl" '(display-line-numbers-mode :wk "Toggle line numbers")
       "tt" '(visual-line-mode :wk "Toggle truncated lines"))
 
-)
+    (chronicler/leader-keys
+      "s" '(:ignore t :wk "Shell")
+      "ss" '(shell :wk "Open shell")))
+
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
 ;; Default fonts
 (set-face-attribute 'default nil
@@ -119,6 +130,38 @@ mac-option-modifier 'none)
 ;; Display line numbers and truncated lines
 (global-display-line-numbers-mode 1)
 (global-visual-line-mode t)
+
+(use-package counsel
+  :after ivy
+  :config (counsel-mode))
+
+(use-package ivy
+  :bind
+  ;; ivy-resume resumes the last Ivy-based completion.
+  (("C-c C-r" . ivy-resume)
+   ("C-x B" . ivy-switch-buffer-other-window))
+  :custom
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  :config
+  (ivy-mode))
+
+(use-package all-the-icons-ivy-rich
+  :ensure t
+  :init (all-the-icons-ivy-rich-mode 1))
+
+(use-package ivy-rich
+  :after ivy
+  :ensure t
+  :init (ivy-rich-mode 1) ;; this gets us descriptions in M-x.
+  :custom
+  (ivy-virtual-abbreviate 'full
+   ivy-rich-switch-buffer-align-virtual-buffer t
+   ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
 
 ;; Which key configuration
 (use-package which-key
